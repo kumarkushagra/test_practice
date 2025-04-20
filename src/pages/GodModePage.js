@@ -43,7 +43,7 @@ const GodModePage = () => {
 
   // Number of questions to use in GOD MODE
   // TODO: Change this to 120
-  const maxQuestionsInGodMode = 5;
+  const maxQuestionsInGodMode = 120;
 
   // Load available courses and initialize specific course if provided
   useEffect(() => {
