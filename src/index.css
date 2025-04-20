@@ -47,10 +47,10 @@
   }
   
   .option-btn.correct {
-    @apply border-green-500 bg-green-50;
+    @apply border-green-500 bg-green-50 ring-2 ring-green-500;
   }
   
   .option-btn.incorrect {
-    @apply border-red-500 bg-red-50;
+    @apply border-red-500 bg-red-50 ring-2 ring-red-500;
   }
 } 

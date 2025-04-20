@@ -160,8 +160,18 @@ const UploadPage = () => {
             <div>
               <p className="text-blue-700 font-medium mb-2">GPT Conversion Tip</p>
               <p className="text-blue-600 text-sm">
-                Upload your PDF to GPT and ask it to convert it to this JSON format, then paste the formatted content below.
-                Use a prompt like: "Convert this PDF to a JSON file with questions and options in the following format: [paste the format above]"
+                Upload your PDF to GPT and use this prompt: "Extract all the multiple-choice questions from this PDF. For each question, include the question text, all answer options, and indicate the correct answer. Format the output as a JSON object with this exact structure:
+                {
+                  'title': 'Quiz Title',
+                  'questions': [
+                    {
+                      'question': 'Question text',
+                      'options': ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+                      'correctAnswer': 2  // 0-based index of correct answer
+                    }
+                  ]
+                }
+                Make sure to properly escape any special characters, use proper JSON formatting with double quotes, and ensure the correctAnswer is the 0-based index of the correct option."
               </p>
             </div>
           </div>

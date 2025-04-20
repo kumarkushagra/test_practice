@@ -281,11 +281,9 @@ const QuizPage = () => {
                 
                 {answered && (
                   <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                    {index === question.correctAnswer ? (
+                    {index === question.correctAnswer && (
                       <FaCheck className="text-green-500 text-xl" />
-                    ) : selectedOption === index ? (
-                      <FaTimes className="text-red-500 text-xl" />
-                    ) : null}
+                    )}
                   </div>
                 )}
               </button>
