@@ -8,12 +8,20 @@
   }
   
   body {
-    @apply bg-gray-50 text-gray-800 min-h-screen;
+    @apply bg-gray-50 text-gray-800 min-h-screen transition-colors duration-200;
     background-image: 
       radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.1) 0px, transparent 50%),
       radial-gradient(at 90% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
       radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.1) 0px, transparent 50%);
     background-attachment: fixed;
+  }
+  
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.2) 0px, transparent 50%),
+      radial-gradient(at 90% 0%, rgba(139, 92, 246, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.2) 0px, transparent 50%);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -26,31 +34,71 @@
     @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out;
   }
   
+  .dark .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-900/20;
+  }
+  
   .btn-secondary {
     @apply bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out;
+  }
+  
+  .dark .btn-secondary {
+    @apply bg-secondary-600 hover:bg-secondary-700 shadow-lg shadow-secondary-900/20;
   }
   
   .btn-outline {
     @apply border border-primary-500 text-primary-500 hover:bg-primary-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 ease-in-out;
   }
   
+  .dark .btn-outline {
+    @apply border-primary-400 text-primary-400 hover:bg-primary-900/30;
+  }
+  
   .card {
     @apply bg-white rounded-xl shadow-soft p-6 transition-transform duration-300 hover:scale-[1.02];
+  }
+  
+  .dark .card {
+    @apply bg-gray-800 shadow-lg shadow-gray-900/30;
   }
   
   .option-btn {
     @apply w-full text-left p-4 rounded-lg border-2 border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 transition-all duration-200;
   }
   
+  .dark .option-btn {
+    @apply border-gray-700 bg-gray-800 hover:border-primary-700 hover:bg-primary-900/30;
+  }
+  
   .option-btn.selected {
     @apply border-primary-500 bg-primary-50;
+  }
+  
+  .dark .option-btn.selected {
+    @apply border-primary-600 bg-primary-900/40;
   }
   
   .option-btn.correct {
     @apply border-green-500 bg-green-50 ring-2 ring-green-500;
   }
   
+  .dark .option-btn.correct {
+    @apply border-green-600 bg-green-900/30 ring-green-600;
+  }
+  
   .option-btn.incorrect {
     @apply border-red-500 bg-red-50 ring-2 ring-red-500;
+  }
+  
+  .dark .option-btn.incorrect {
+    @apply border-red-600 bg-red-900/30 ring-red-600;
+  }
+  
+  .theme-toggle {
+    @apply fixed bottom-4 right-4 z-50 p-2 bg-white text-gray-800 rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 transition-all;
+  }
+  
+  .dark .theme-toggle {
+    @apply bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700;
   }
 } 

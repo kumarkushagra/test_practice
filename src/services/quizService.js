@@ -280,13 +280,82 @@ export const getAllQuestions = async () => {
 };
 
 /**
+ * Get all questions from a specific course (for GOD MODE)
+ * @param {string} courseId - The course ID to get questions from (null for all courses)
+ * @returns {Promise<Array>} - Array of questions with course and week info
+ */
+export const getQuestionsForCourse = async (courseId = null) => {
+  try {
+    // If no courseId is specified, get all questions
+    if (!courseId) {
+      return await getAllQuestions();
+    }
+    
+    const courses = await getCourses();
+    const selectedCourse = courses.find(c => c.id === courseId);
+    
+    if (!selectedCourse) {
+      throw new Error(`Course with ID ${courseId} not found`);
+    }
+    
+    const courseQuestions = [];
+    
+    // Get all stored questions from local storage
+    const storedQuestions = localStorage.getItem(STORAGE_KEYS.QUESTIONS);
+    const questionsMap = storedQuestions ? JSON.parse(storedQuestions) : {};
+    
+    // Load all weeks for the selected course
+    for (const week of selectedCourse.weeks) {
+      const quizId = `${selectedCourse.id}/${week.id}`;
+      
+      try {
+        let weekQuizData;
+        
+        // Try local storage first
+        if (questionsMap[quizId]) {
+          weekQuizData = questionsMap[quizId];
+        } else {
+          // Otherwise, load the quiz
+          weekQuizData = await loadQuiz(selectedCourse.id, week.id);
+        }
+        
+        // If we have questions, add them to the collection with metadata
+        if (weekQuizData && weekQuizData.questions) {
+          // Add source information to each question to trace it back to the course/week
+          const questionsWithSource = weekQuizData.questions.map(q => ({
+            ...q,
+            source: {
+              courseId: selectedCourse.id,
+              courseName: selectedCourse.name,
+              weekId: week.id,
+              weekName: week.name
+            }
+          }));
+          
+          courseQuestions.push(...questionsWithSource);
+        }
+      } catch (error) {
+        console.warn(`Could not load questions for ${quizId}:`, error);
+      }
+    }
+    
+    return courseQuestions;
+  } catch (error) {
+    console.error(`Error getting questions for course ${courseId}:`, error);
+    return [];
+  }
+};
+
+/**
  * Save a new JSON file to a course
  * @param {string} courseId - The course ID (existing or new)
  * @param {string} courseName - The display name for the course (if new)
  * @param {Object} jsonData - The JSON data containing questions
+ * @param {number} weekNumber - The week number to save (default: next available)
+ * @param {boolean} overwrite - Whether to overwrite existing file
  * @returns {Promise<Object>} - The updated or new course
  */
-export const saveJsonToCourse = async (courseId, courseName, jsonData) => {
+export const saveJsonToCourse = async (courseId, courseName, jsonData, weekNumber = null, overwrite = false) => {
   try {
     // Validate JSON structure first
     const validation = validateQuizFormat(jsonData);
@@ -320,18 +389,45 @@ export const saveJsonToCourse = async (courseId, courseName, jsonData) => {
       courses.push(course);
     }
     
-    // Determine the next week number
-    const weekNumber = course.weeks.length + 1;
-    const weekId = `week${weekNumber}`;
+    // Determine the week number and ID
+    let weekId;
+    if (weekNumber !== null) {
+      // Use the provided week number
+      weekId = `week${weekNumber}`;
+    } else {
+      // Auto-increment (use next available number)
+      const nextWeekNumber = course.weeks.length + 1;
+      weekId = `week${nextWeekNumber}`;
+      weekNumber = nextWeekNumber;
+    }
     
-    // Add the new week to the course
-    course.weeks.push({
-      id: weekId,
-      name: `Week ${weekNumber}`,
-      questionCount: jsonData.questions.length
+    // Check if this week already exists
+    const existingWeekIndex = course.weeks.findIndex(w => w.id === weekId);
+    
+    if (existingWeekIndex >= 0) {
+      if (!overwrite) {
+        throw new Error(`Week ${weekNumber} already exists for this course`);
+      }
+      // If overwriting, update the existing week
+      course.totalQuestions = (course.totalQuestions || 0) - course.weeks[existingWeekIndex].questionCount + jsonData.questions.length;
+      course.weeks[existingWeekIndex].questionCount = jsonData.questions.length;
+    } else {
+      // Add the new week to the course
+      course.weeks.push({
+        id: weekId,
+        name: `Week ${weekNumber}`,
+        questionCount: jsonData.questions.length
+      });
+      
+      course.totalQuestions = (course.totalQuestions || 0) + jsonData.questions.length;
+    }
+    
+    // Sort weeks by week number
+    course.weeks.sort((a, b) => {
+      const aNum = parseInt(a.id.replace('week', ''), 10);
+      const bNum = parseInt(b.id.replace('week', ''), 10);
+      return aNum - bNum;
     });
-    
-    course.totalQuestions = (course.totalQuestions || 0) + jsonData.questions.length;
     
     // Store the quiz data in the questions map
     const quizId = `${formattedCourseId}/${weekId}`;
@@ -343,21 +439,82 @@ export const saveJsonToCourse = async (courseId, courseName, jsonData) => {
     
     // Also attempt to save to the server's file system
     try {
-      // In a real application, this would be an API call to save to server
-      console.log(`[SERVER SAVE] Would save JSON data to /db/courses/${formattedCourseId}/${weekId}.json`);
-      // For demonstration, we'll just log the data
-      console.log('JSON data to save:', jsonData);
+      // Make an API call to save the data on the server
+      const saveResponse = await fetch('/api/save-quiz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          courseId: formattedCourseId,
+          weekId,
+          data: jsonData,
+          overwrite
+        })
+      });
       
-      // We can't actually write to the file system directly from the browser
-      // This would require server-side code (e.g., a Node.js API endpoint)
+      if (!saveResponse.ok) {
+        const error = await saveResponse.text();
+        console.error('Server save failed:', error);
+        // Continue anyway, since we've saved to localStorage
+      } else {
+        console.log('Quiz data saved to server successfully');
+      }
     } catch (saveError) {
-      console.error('Error saving to server (would actually save in a real app):', saveError);
+      console.error('Error saving to server:', saveError);
+      // We don't throw here, as we've already saved to localStorage
     }
     
     return { course, isNewCourse, weekId };
   } catch (error) {
     console.error('Error saving JSON to course:', error);
     throw error;
+  }
+};
+
+/**
+ * Check if a file exists for a specific course and week
+ * @param {string} courseId - The course ID
+ * @param {string} weekId - The week ID
+ * @returns {Promise<boolean>} - Whether the file exists
+ */
+export const checkFileExists = async (courseId, weekId) => {
+  try {
+    // First check in localStorage
+    const storedQuestions = localStorage.getItem(STORAGE_KEYS.QUESTIONS);
+    if (storedQuestions) {
+      const questionsMap = JSON.parse(storedQuestions);
+      const quizId = `${courseId}/${weekId}`;
+      if (questionsMap[quizId]) {
+        return true;
+      }
+    }
+    
+    // Then check on the server
+    try {
+      const response = await fetch(`/db/courses/${courseId}/${weekId}.json`);
+      if (response.ok) {
+        return true;
+      }
+    } catch (error) {
+      // Ignore errors, just means the file doesn't exist
+    }
+    
+    // Also check the alternative location
+    try {
+      const response = await fetch(`/json/${courseId}/${weekId}.json`);
+      if (response.ok) {
+        return true;
+      }
+    } catch (error) {
+      // Ignore errors, just means the file doesn't exist
+    }
+    
+    // If we get here, the file doesn't exist in any location
+    return false;
+  } catch (error) {
+    console.error('Error checking if file exists:', error);
+    return false;
   }
 };
 

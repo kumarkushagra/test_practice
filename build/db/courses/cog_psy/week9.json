@@ -1,0 +1,76 @@
+{
+    "title": "Cognitive Psychology - Assignment 9",
+    "questions": [
+      {
+        "question": "Which of the following is/are generally agreed upon as necessary criteria/criterion for claiming that a communication system is a language?",
+        "options": ["regularity", "productivity", "referentiality", "both regularity and productivity"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Bird songs and bee dances are not considered to be languages because:",
+        "options": ["they do not use words.", "they do not have a formal grammar.", "they cannot express infinite combinations of ideas.", "they do not have a permanent (written) form."],
+        "correctAnswer": 2
+      },
+      {
+        "question": "The smallest unit of language that carries a consistent meaning is called a:",
+        "options": ["feature", "phoneme", "phonetic", "morpheme"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "English speakers hear a distinction between “l” and “r” sounds; speakers of some Chinese dialects do not. This example illustrates a difference in the ______ aspects of the two languages.",
+        "options": ["phonetic", "phonological", "semantic", "syntactic"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Studies of sentence comprehension have shown all of the following EXCEPT:",
+        "options": [
+          "Exact wording of a clause is preserved in memory while that clause is actively being processed.",
+          "After a sentence has been processed, exact wording is discarded and only the general meaning is preserved in memory.",
+          "We typically do not consciously notice ambiguities in sentences.",
+          "We do not process exact wording in memory; we only process meaning."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "“What’s for dinner?” “Food.” The second speaker is breaking Grice’s maxim of",
+        "options": ["quantity", "quality", "relation", "manner"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Fodor’s modularity hypothesis proposes that:",
+        "options": [
+          "language processing actually encompasses several subskills (modules).",
+          "in understanding language, we separate sentences and phrases into individual units known as modules.",
+          "thought processes are dependent upon the language we use to think.",
+          "certain language processes operate independently of other cognitive processes such as memory and attention."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Whorf’s linguistic relativity hypothesis:",
+        "options": [
+          "asserts that thought is dependent upon language.",
+          "is supported by studies of color perception.",
+          "asserts that thought is dependent upon language, and is supported by studies of color perception.",
+          "asserts that thought is dependent upon language, and is not supported by studies of color perception."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Damage to Broca’s area often leads to:",
+        "options": [
+          "expressive aphasia.",
+          "receptive aphasia.",
+          "inability to comprehend written language.",
+          "both expressive aphasia and inability to comprehend written language."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "The word “bat” is considered to be lexically ambiguous because it has two possible meanings.",
+        "options": ["True", "False"],
+        "correctAnswer": 0
+      }
+    ]
+  }
+  

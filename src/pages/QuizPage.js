@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -278,14 +278,6 @@ const QuizPage = () => {
                   </div>
                   <span>{option}</span>
                 </div>
-                
-                {answered && (
-                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                    {index === question.correctAnswer && (
-                      <FaCheck className="text-green-500 text-xl" />
-                    )}
-                  </div>
-                )}
               </button>
             ))}
           </div>

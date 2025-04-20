@@ -1,0 +1,64 @@
+
+> mcq-practice@1.0.0 dev
+> concurrently "npm run server" "npm run start"
+
+[1] 
+[1] > mcq-practice@1.0.0 start
+[1] > react-scripts start
+[1] 
+[0] 
+[0] > mcq-practice@1.0.0 server
+[0] > node server.js
+[0] 
+[0] Server running on port 3001
+[0] Serving static files from: /home/hp/dev/test_practice/public
+[0] Database directory: /home/hp/dev/test_practice/public/db/courses
+[1] (node:66637) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[1] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1] (node:66637) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[1] Starting the development server...
+[1] 
+[1] Compiled successfully!
+[1] 
+[1] You can now view mcq-practice in the browser.
+[1] 
+[1]   Local:            http://localhost:3000
+[1]   On Your Network:  http://192.168.1.14:3000
+[1] 
+[1] Note that the development build is not optimized.
+[1] To create a production build, use npm run build.
+[1] 
+[1] webpack compiled successfully
+2025-04-20T01:48:00Z INF Thank you for trying Cloudflare Tunnel. Doing so, without a Cloudflare account, is a quick way to experiment and try it out. However, be aware that these account-less Tunnels have no uptime guarantee, are subject to the Cloudflare Online Services Terms of Use (https://www.cloudflare.com/website-terms/), and Cloudflare reserves the right to investigate your use of Tunnels for violations of such terms. If you intend to use Tunnels in production you should use a pre-created named tunnel by following: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps
+2025-04-20T01:48:00Z INF Requesting new quick Tunnel on trycloudflare.com...
+2025-04-20T01:48:05Z INF +--------------------------------------------------------------------------------------------+
+2025-04-20T01:48:05Z INF |  Your quick Tunnel has been created! Visit it at (it may take some time to be reachable):  |
+2025-04-20T01:48:05Z INF |  https://abandoned-creator-wait-bizrate.trycloudflare.com                                  |
+2025-04-20T01:48:05Z INF +--------------------------------------------------------------------------------------------+
+2025-04-20T01:48:05Z INF Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]
+2025-04-20T01:48:05Z INF Version 2025.2.1 (Checksum 1dfc2d7ceaa233fcc9b16858721c810fe47c7d1b3d644e1e8d6640570cc2c9ed)
+2025-04-20T01:48:05Z INF GOOS: linux, GOVersion: go1.22.10, GoArch: amd64
+2025-04-20T01:48:05Z INF Settings: map[ha-connections:1 protocol:quic url:http://localhost:3000]
+2025-04-20T01:48:05Z INF cloudflared will not automatically update if installed by a package manager.
+2025-04-20T01:48:05Z INF Generated Connector ID: 4fdcab66-4514-4647-a6fa-f960ef296887
+2025-04-20T01:48:05Z INF Initial protocol quic
+2025-04-20T01:48:05Z INF ICMP proxy will use 192.168.1.14 as source for IPv4
+2025-04-20T01:48:05Z INF ICMP proxy will use 2401:4900:1c64:50f5:930d:953:d3a6:d303 in zone wlo1 as source for IPv6
+2025-04-20T01:48:05Z WRN The user running cloudflared process has a GID (group ID) that is not within ping_group_range. You might need to add that user to a group within that range, or instead update the range to encompass a group the user is already in by modifying /proc/sys/net/ipv4/ping_group_range. Otherwise cloudflared will not be able to ping this network error="Group ID 1000 is not between ping group 1 to 0"
+2025-04-20T01:48:05Z WRN ICMP proxy feature is disabled error="cannot create ICMPv4 proxy: Group ID 1000 is not between ping group 1 to 0 nor ICMPv6 proxy: socket: permission denied"
+2025-04-20T01:48:05Z INF ICMP proxy will use 192.168.1.14 as source for IPv4
+2025-04-20T01:48:05Z INF ICMP proxy will use 2401:4900:1c64:50f5:930d:953:d3a6:d303 in zone wlo1 as source for IPv6
+2025-04-20T01:48:05Z INF Starting metrics server on 127.0.0.1:20245/metrics
+2025-04-20T01:48:05Z INF Using [CurveID(4588) CurveID(25497) CurveP256] as curve preferences connIndex=0 event=0 ip=198.41.192.107
+2025/04/20 07:18:05 failed to sufficiently increase receive buffer size (was: 208 kiB, wanted: 7168 kiB, got: 416 kiB). See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes for details.
+2025-04-20T01:48:06Z INF Registered tunnel connection connIndex=0 connection=de46a882-47f3-4563-b9b8-4f3ee2471a7a event=0 ip=198.41.192.107 location=del01 protocol=quic
+2025-04-20T01:48:34Z INF Initiating graceful shutdown due to signal interrupt ...
+2025-04-20T01:48:35Z ERR Failed to serve tunnel connection error="Application error 0x0 (remote)" connIndex=0 event=0 ip=198.41.192.107
+2025-04-20T01:48:35Z ERR Serve tunnel error error="Application error 0x0 (remote)" connIndex=0 event=0 ip=198.41.192.107
+2025-04-20T01:48:35Z INF Retrying connection in up to 1s connIndex=0 event=0 ip=198.41.192.107
+2025-04-20T01:48:35Z ERR no more connections active and exiting
+2025-04-20T01:48:35Z INF Tunnel server stopped
+2025-04-20T01:48:35Z INF Metrics server stopped
+[1] npm run start exited with code 0
+[0] Terminated
+[0] npm run server exited with code 143

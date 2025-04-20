@@ -10,12 +10,13 @@ import {
   FaCode,
   FaBook,
   FaPlus,
-  FaRobot
+  FaRobot,
+  FaExclamationTriangle
 } from 'react-icons/fa';
-import { getCourses, validateQuizFormat, saveJsonToCourse } from '../services/quizService';
+import { getCourses, validateQuizFormat, saveJsonToCourse, checkFileExists } from '../services/quizService';
 
 const UploadPage = () => {
-  const [step, setStep] = useState('input'); // 'input', 'select', 'success'
+  const [step, setStep] = useState('input'); // 'input', 'select', 'success', 'conflict'
   const [jsonInput, setJsonInput] = useState('');
   const [jsonData, setJsonData] = useState(null);
   const [jsonError, setJsonError] = useState(null);
@@ -25,6 +26,9 @@ const UploadPage = () => {
   const [selectedCourseId, setSelectedCourseId] = useState('');
   const [uploadChoice, setUploadChoice] = useState(''); // 'new' or 'existing'
   const [saveResult, setSaveResult] = useState(null);
+  const [weekNumber, setWeekNumber] = useState(1);
+  const [fileExists, setFileExists] = useState(false);
+  const [conflictWeekId, setConflictWeekId] = useState('');
   const navigate = useNavigate();
 
   // Load existing courses
@@ -43,6 +47,21 @@ const UploadPage = () => {
 
     fetchCourses();
   }, []);
+
+  // When course selection changes, update the default week number
+  useEffect(() => {
+    if (selectedCourseId && uploadChoice === 'existing') {
+      const selectedCourse = courses.find(c => c.id === selectedCourseId);
+      if (selectedCourse && selectedCourse.weeks && selectedCourse.weeks.length > 0) {
+        // Set default week number to the next available week
+        setWeekNumber(selectedCourse.weeks.length + 1);
+      } else {
+        setWeekNumber(1);
+      }
+    } else {
+      setWeekNumber(1);
+    }
+  }, [selectedCourseId, uploadChoice, courses]);
 
   // Handle JSON input validation
   const handleJsonValidate = () => {
@@ -79,33 +98,88 @@ const UploadPage = () => {
     }
   };
 
+  // Check if a file exists for the selected course and week
+  const checkForExistingFile = async () => {
+    try {
+      const courseId = uploadChoice === 'new' 
+        ? newCourseName.toLowerCase().replace(/\s+/g, '_')
+        : selectedCourseId;
+      
+      const weekId = `week${weekNumber}`;
+      
+      // Check if this week already exists
+      const exists = await checkFileExists(courseId, weekId);
+      
+      if (exists) {
+        setFileExists(true);
+        setConflictWeekId(weekId);
+        setStep('conflict');
+        return true;
+      }
+      
+      return false;
+    } catch (err) {
+      console.error('Error checking file existence:', err);
+      return false;
+    }
+  };
+
   // Handle course selection or creation
   const handleSaveJson = async () => {
     try {
-      let courseId, courseName;
+      setJsonError(null);
       
-      if (uploadChoice === 'new') {
-        if (!newCourseName.trim()) {
-          setJsonError('Please enter a course name');
-          return;
-        }
-        courseId = newCourseName;
-        courseName = newCourseName;
-      } else {
-        if (!selectedCourseId) {
-          setJsonError('Please select a course');
-          return;
-        }
-        courseId = selectedCourseId;
-        const course = courses.find(c => c.id === selectedCourseId);
-        courseName = course ? course.name : '';
+      if (uploadChoice === 'new' && !newCourseName.trim()) {
+        setJsonError('Please enter a course name');
+        return;
       }
       
-      const result = await saveJsonToCourse(courseId, courseName, jsonData);
+      if (uploadChoice === 'existing' && !selectedCourseId) {
+        setJsonError('Please select a course');
+        return;
+      }
+      
+      if (weekNumber < 1 || weekNumber > 99) {
+        setJsonError('Week number must be between 1 and 99');
+        return;
+      }
+      
+      // Check if file already exists
+      const fileAlreadyExists = await checkForExistingFile();
+      if (fileAlreadyExists) {
+        return; // Handled in the conflict resolution screen
+      }
+      
+      // Proceed with saving
+      const courseId = uploadChoice === 'new' ? newCourseName : selectedCourseId;
+      const courseName = uploadChoice === 'new' ? newCourseName : courses.find(c => c.id === selectedCourseId)?.name || '';
+      
+      const result = await saveJsonToCourse(courseId, courseName, jsonData, weekNumber);
       setSaveResult(result);
       setStep('success');
     } catch (err) {
       setJsonError(`Error saving quiz: ${err.message}`);
+    }
+  };
+
+  // Handle conflict resolution
+  const handleConflictResolution = async (shouldReplace) => {
+    try {
+      if (shouldReplace) {
+        // User chose to replace the file, proceed with save
+        const courseId = uploadChoice === 'new' ? newCourseName : selectedCourseId;
+        const courseName = uploadChoice === 'new' ? newCourseName : courses.find(c => c.id === selectedCourseId)?.name || '';
+        
+        const result = await saveJsonToCourse(courseId, courseName, jsonData, weekNumber, true);
+        setSaveResult(result);
+        setStep('success');
+      } else {
+        // User chose not to replace, go back to selection
+        setStep('select');
+      }
+    } catch (err) {
+      setJsonError(`Error handling conflict: ${err.message}`);
+      setStep('select');
     }
   };
 
@@ -161,19 +235,33 @@ const UploadPage = () => {
               <p className="text-blue-700 font-medium mb-2">GPT Conversion Tip</p>
               <p className="text-blue-600 text-sm">
                 Upload your PDF to GPT and use this prompt: "Extract all the multiple-choice questions from this PDF. For each question, include the question text, all answer options, and indicate the correct answer. Format the output as a JSON object with this exact structure:
-                {
-                  'title': 'Quiz Title',
-                  'questions': [
+                {`
+                  "title": "Quiz Title",
+                  "questions": [
                     {
-                      'question': 'Question text',
-                      'options': ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-                      'correctAnswer': 2  // 0-based index of correct answer
+                      "question": "Question text",
+                      "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+                      "correctAnswer": 2  // 0-based index of correct answer
                     }
                   ]
-                }
+                `}
                 Make sure to properly escape any special characters, use proper JSON formatting with double quotes, and ensure the correctAnswer is the 0-based index of the correct option."
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Storage Location Info */}
+      <div className="bg-gray-50 rounded-xl p-4 mb-8 border border-gray-200">
+        <div className="flex items-start">
+          <FaInfoCircle className="text-primary-500 mr-2 mt-1 flex-shrink-0" />
+          <div>
+            <p className="text-gray-700 font-medium">Where uploads are stored:</p>
+            <p className="text-gray-600 text-sm">
+              Server: <code className="bg-gray-100 px-1 rounded">/public/db/courses/{"{courseId}"}/{"{weekId}"}.json</code><br />
+              Browser: Also saved in your browser's localStorage for offline access
+            </p>
           </div>
         </div>
       </div>
@@ -267,6 +355,19 @@ const UploadPage = () => {
                 value={newCourseName}
                 onChange={(e) => setNewCourseName(e.target.value)}
                 placeholder="Enter course name"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:border-primary-500 focus:ring-primary-500 focus:ring-1 focus:outline-none mb-4"
+              />
+              
+              <label htmlFor="weekNumber" className="block text-gray-700 font-medium mb-2">
+                Week Number:
+              </label>
+              <input
+                id="weekNumber"
+                type="number"
+                min="1"
+                max="99"
+                value={weekNumber}
+                onChange={(e) => setWeekNumber(parseInt(e.target.value, 10) || 1)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:border-primary-500 focus:ring-primary-500 focus:ring-1 focus:outline-none"
               />
             </div>
@@ -281,7 +382,7 @@ const UploadPage = () => {
                 id="courseSelect"
                 value={selectedCourseId}
                 onChange={(e) => setSelectedCourseId(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:border-primary-500 focus:ring-primary-500 focus:ring-1 focus:outline-none"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:border-primary-500 focus:ring-primary-500 focus:ring-1 focus:outline-none mb-4"
               >
                 <option value="">-- Select a Course --</option>
                 {courses.map(course => (
@@ -290,6 +391,19 @@ const UploadPage = () => {
                   </option>
                 ))}
               </select>
+              
+              <label htmlFor="weekNumber" className="block text-gray-700 font-medium mb-2">
+                Week Number:
+              </label>
+              <input
+                id="weekNumber"
+                type="number"
+                min="1"
+                max="99"
+                value={weekNumber}
+                onChange={(e) => setWeekNumber(parseInt(e.target.value, 10) || 1)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:border-primary-500 focus:ring-primary-500 focus:ring-1 focus:outline-none"
+              />
             </div>
           )}
           
@@ -325,6 +439,41 @@ const UploadPage = () => {
         </motion.div>
       )}
 
+      {step === 'conflict' && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 mb-6"
+        >
+          <div className="flex items-center mb-4 text-yellow-700">
+            <FaExclamationTriangle className="text-2xl mr-3 text-yellow-500" />
+            <h2 className="text-xl font-semibold">File Already Exists!</h2>
+          </div>
+          
+          <p className="mb-6 text-gray-700">
+            A file for Week {weekNumber} already exists for this course. Would you like to replace it with your new data or cancel?
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => handleConflictResolution(false)}
+              className="btn-outline border-yellow-500 text-yellow-700"
+            >
+              <FaArrowLeft className="mr-2" />
+              Cancel & Go Back
+            </button>
+            <button 
+              onClick={() => handleConflictResolution(true)}
+              className="btn-primary bg-yellow-500 hover:bg-yellow-600"
+            >
+              <FaUpload className="mr-2" />
+              Replace Existing File
+            </button>
+          </div>
+        </motion.div>
+      )}
+      
       {step === 'success' && saveResult && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -340,8 +489,8 @@ const UploadPage = () => {
           
           <p className="text-lg text-gray-600 mb-6">
             {saveResult.isNewCourse 
-              ? `Created new course "${saveResult.course.name}" with Week 1`
-              : `Added Week ${saveResult.course.weeks.length} to "${saveResult.course.name}"`}
+              ? `Created new course "${saveResult.course.name}" with Week ${weekNumber}`
+              : `Added Week ${weekNumber} to "${saveResult.course.name}"`}
           </p>
           
           <p className="text-gray-500 mb-8">
