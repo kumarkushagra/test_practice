@@ -1,0 +1,70 @@
+{
+  "title": "Attention and Cognitive Processing Quiz",
+  "questions": [
+    {
+      "question": "Noticing a red flower among a field of purple flowers illustrates ______.",
+      "options": ["the attention capture phenomenon", "the cocktail party effect", "the bottleneck of attention", "a shadowing task"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "According to Treisman, if you listen to two competing messages simultaneously, you are more likely to pick up information from the second message if that message ______.",
+      "options": ["relates to the other message", "was spoken more slowly", "includes a spotlight", "is louder"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Stroop interference lessens when:",
+      "options": [
+        "participants are given more practice at naming colors",
+        "participants are encouraged to focus carefully",
+        "participants are given more practice at reading color names",
+        "participants are better readers"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "When listening to a conversation, your attention is momentarily diverted when you hear your name spoken in a different conversation across the room. This is an example of the:",
+      "options": ["Stroop effect", "cocktail party effect", "dichotic listening phenomenon", "attenuation effect"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Broadbent, in proposing his filter theory of attention, argued that an attentional filter lets some information through and blocks out the rest. This filter is based upon:",
+      "options": ["the meaning of the message", "a physical characteristic of the message, such as its location", "the importance of the message", "the number of repetitions of the message"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Our attention has been said to involve a ______ that filters out everything except the information we are attending to.",
+      "options": ["net", "bottleneck", "switchboard", "bridge"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which of these is known to influence the cocktail party effect?",
+      "options": ["a person’s level of extroversion or introversion", "a person’s intelligence", "the salience of the message", "cultural differences in filtering abilities"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "According to ____ theory, we never actually acquire unattended material at all.",
+      "options": ["capacity", "bottleneck", "schema", "attenuation"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Children with attention deficit hyperactivity disorder (ADHD):",
+      "options": [
+        "are more likely to be girls than boys",
+        "cannot sustain vigilance on repetitive or dull tasks",
+        "cannot switch attention from one task to another",
+        "cannot devote mental resources to tasks"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "According to Treisman, people tend to process:",
+      "options": [
+        "only as much as is necessary to separate the attended from the unattended message",
+        "at the highest possible level given the amount of background distraction",
+        "only to the level of linguistic characteristics, separating it into words",
+        "only to the level of physical characteristics"
+      ],
+      "correctAnswer": 0
+    }
+  ]
+}

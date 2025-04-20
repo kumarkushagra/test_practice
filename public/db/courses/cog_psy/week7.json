@@ -1,0 +1,66 @@
+{
+    "title": "Cognitive Psychology - Assignment 7",
+    "questions": [
+      {
+        "question": "A ________ is a mental representation of some object, event, or pattern.",
+        "options": ["category", "concept", "script", "memory"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "“Characteristic features” and “family resemblance” are important aspects of the _________ view of concepts.",
+        "options": ["classical", "prototype", "exemplar", "schema"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "If “soda” is a basic-level category, then ______ would be a subordinate level.",
+        "options": ["soft drink", "beverage", "drink", "Coca-Cola"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "According to the ______ view of concepts, people categorize new instances by comparing them to representations of previously stored instances.",
+        "options": ["classical", "prototype", "exemplar", "schema"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "The _____ view of concepts argues that concepts include representations of at least some individual instances and not only abstract summaries.",
+        "options": ["classical", "prototype", "schemata", "both exemplar and schemata"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which of the following is true regarding schemata?",
+        "options": [
+          "A schema refers to something smaller and more specific than a concept.",
+          "Schemata are passive rather than active.",
+          "A schema contains only fixed parts, never variables.",
+          "Schemata can indicate relationships among various pieces of information."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "The ______ view of concepts argues that a person uses his/her theories about the way the world works to justify the classification of instances in the same category.",
+        "options": ["prototype", "exemplar", "schema", "knowledge-based"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "The schema view of concept formation assumes that:",
+        "options": [
+          "there are clear boundaries among individual schemata.",
+          "there is cognitive economy among concepts.",
+          "information is abstracted across instances.",
+          "no information is stored about actual instances."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which of the following is a good example of a basic level of categorization?",
+        "options": ["musical instrument", "piano", "electronic keyboard", "grand piano"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "If “sandwich” is a basic-level category, then ______ would be a superordinate level.",
+        "options": ["soup", "sub", "panini", "food"],
+        "correctAnswer": 3
+      }
+    ]
+  }
+  

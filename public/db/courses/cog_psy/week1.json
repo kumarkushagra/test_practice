@@ -1,0 +1,70 @@
+{
+  "title": "Cognitive Psychology Quiz",
+  "questions": [
+    {
+      "question": "Wilhelm Wundt and his students used a technique known as _________ to study mental states.",
+      "options": ["behaviorism", "intensity measurement", "componentialism", "introspection"],
+      "correctAnswer": 3
+    },
+    {
+      "question": "Which psychologist extensively tested his own memory to develop theories of cognition?",
+      "options": ["Aristotle", "Wundt", "Ebbinghaus", "Chomsky"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "All connectionist models share the assumption that:",
+      "options": [
+        "a central processor directs the flow of information",
+        "processing occurs in parallel",
+        "knowledge is stored in various storehouses",
+        "processing occurs serially"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "The term “limited capacity processors” suggests that:",
+      "options": [
+        "computers have limited memory storage",
+        "neurons can only fire at a certain rate",
+        "human beings can only do so many things at once",
+        "processing in the brain occurs in parallel"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "A traditional “school” within psychology that had as its goal the identification of the simplest possible units of the mind:",
+      "options": ["functionalism", "structuralism", "behaviorism", "componentialism"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Cognitive psychology is broad, and thus overlaps with many other fields including neuroscience, philosophy, and ______.",
+      "options": ["botany", "astronomy", "linguistics", "mining"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "William James’s ideas regarding psychological phenomena centered around the idea of",
+      "options": [
+        "the sea of the subconscious",
+        "a stream of consciousness",
+        "a stream of subconsciousness",
+        "a sea of consciousness"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "A body of knowledge structured according to what its proponents consider important, which guides research topics and research methods, is called a ___________.",
+      "options": ["hypothesis", "methodology", "paradigm", "metaphor"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "The analysis of information processing systems is of special interest to _____ psychology.",
+      "options": ["behavioral", "biological", "psychoanalytic", "cognitive"],
+      "correctAnswer": 3
+    },
+    {
+      "question": "If you think of cognitive processing as a type of information processing, then the brain is the ______ and the cognitive processes themselves are the ______.",
+      "options": ["response; stimulus", "hardware; software", "software; hardware", "stimulus; response"],
+      "correctAnswer": 1
+    }
+  ]
+}

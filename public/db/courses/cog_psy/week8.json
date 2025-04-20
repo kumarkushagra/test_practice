@@ -1,0 +1,86 @@
+{
+    "title": "Cognitive Psychology - Assignment 8",
+    "questions": [
+      {
+        "question": "Several mnemonic devices, including the method of loci, the pegword method, and the method of interacting images, have in common their reliance on:",
+        "options": ["verbal rehearsal", "creating a story", "visual imagery", "connecting new information to well-known information"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "According to the dual-coding hypothesis, which of the following word pairs would be easiest to remember?",
+        "options": ["fire-inspiration", "ferret-catalog", "freedom-honesty", "cat-liberty"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In Paivio’s study of paired-associate learning, which order shows recall from highest to lowest?",
+        "options": [
+          "I, III, II, IV",
+          "I, II, III, IV",
+          "II, III, I, IV",
+          "IV, III, II, I"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "The relational-organizational hypothesis is supported by:",
+        "options": [
+          "the effectiveness of the method of loci",
+          "the fact that concrete words are recalled better than abstract words",
+          "the fact that noninteractive images do not facilitate recall whereas interactive images do facilitate recall",
+          "the effectiveness of the pegword method"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Some theorists believe that there is a single code for all types of information; this code is known as a _______ representation.",
+        "options": ["visual", "pictorial", "verbal", "propositional"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Behaviorists objected to the study of visual imagery because:",
+        "options": [
+          "it cannot be investigated with sufficient scientific control",
+          "there are too many individual differences in people’s abilities to visualize",
+          "behaviorists prefer to study animals and animals have no imagery abilities",
+          "we can only study visual imagery and not auditory images, olfactory images, etc."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Kosslyn found that people were:",
+        "options": [
+          "faster at verifying “claws” whether or not they used visual imagery",
+          "faster at verifying “heads” whether or not they used visual imagery",
+          "faster at verifying “heads” when they used imagery, “claws” when they did not",
+          "faster at verifying “claws” when they used imagery, “heads” when they did not"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Finke’s principle of _____ states that mental imagery allows us to retrieve information that was not intentionally stored.",
+        "options": ["perceptual equivalence", "transformational equivalence", "implicit encoding", "structural encoding"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Your mental map of your campus is probably:",
+        "options": [
+          "larger than reality",
+          "smaller than reality",
+          "more regular, with more straight lines and right angles, than reality",
+          "less regular, with fewer straight lines and right angles, than reality"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Cooper’s studies of the mental rotation of complex polygons indicated that:",
+        "options": [
+          "people rotated more complex polygons in the same amount of time as simpler polygons",
+          "people took longer to rotate more complex polygons",
+          "people actually took less time to rotate more complex polygons",
+          "people were unable to mentally rotate a polygon with greater than 10 points with more than chance accuracy"
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }
+  

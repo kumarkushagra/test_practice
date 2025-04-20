@@ -1,0 +1,76 @@
+{
+    "title": "Memory Systems and Forgetting - Assignment 5",
+    "questions": [
+      {
+        "question": "Ebbinghaus’s forgetting curve demonstrates that:",
+        "options": [
+          "Forgetting is rapid at first and then levels off",
+          "forgetting is slow at first and then speeds up",
+          "forgetting occurs at a steady pace, beginning immediately after learning",
+          "no forgetting occurs until 24 hours after learning"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which of the following would be a part of your declarative memory system?",
+        "options": [
+          "being able to name a hybrid car",
+          "knowing how to react to a red light",
+          "knowing how to drive a car",
+          "knowing how to ride a bicycle"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "A schema for a routine event, such as going to the dentist, is called a:",
+        "options": ["script", "category", "exemplar", "prototype"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Information such as the name of the person who sat in front of you in the fifth grade is stored in:",
+        "options": ["sensory memory", "short-term memory", "working memory", "long-term memory"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "The term “anterograde amnesia” refers to:",
+        "options": [
+          "the loss of the ability to form new memories.",
+          "the loss of the ability to recall old events.",
+          "the loss of short-term memory.",
+          "the loss of all memory ability."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "The term “retrograde amnesia” refers to:",
+        "options": [
+          "the loss of the ability to form new memories.",
+          "the loss of the ability to recall old events.",
+          "the loss of short-term memory.",
+          "the loss of sensory memory."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "When we cannot retrieve information from memory, we say that _____ has occurred.",
+        "options": ["forgetting", "a memory trace", "sensory decay", "encoding failure"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "The results of the Brown–Peterson short-term memory task can be explained by:",
+        "options": ["decay", "interference", "both decay and interference", "neither decay nor interference"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "The calling to mind of previously stored information is known as",
+        "options": ["retrieval", "encoding", "storage", "forgetting"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "You have just listened to a list of 20 words. When asked to recall these words in any order, you are LEAST LIKELY to recall the",
+        "options": ["first word", "second word", "10th word", "20th word"],
+        "correctAnswer": 2
+      }
+    ]
+  }
+  
